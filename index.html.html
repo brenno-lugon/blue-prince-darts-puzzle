@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Tabuleiro de Dardos</title>
+  <style>
+    body {
+      background: #111;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      padding-top: 30px;
+      color: white;
+      font-family: sans-serif;
+    }
+
+    svg {
+      width: 500px;
+      height: 500px;
+      margin-top: -20px;
+    }
+
+    .setor {
+      cursor: pointer;
+      transition: fill 0.3s;
+    }
+
+    text {
+      font-size: 22px;
+      fill: white;
+      font-family: sans-serif;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      font-size: 16px;
+      background: #444;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #resultado {
+      margin-top: 10px;
+      font-size: 18px;
+      text-align: center;
+      min-height: 24px;
+    }
+
+    .botoes {
+      display: flex;
+      gap: 10px; /* espaço entre os botões */
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Tabuleiro de Dardos</h2>
+
+<div class="botoes">
+  <button id="btn-calcular">Calcular</button>
+  <button id="btn-limpar">Limpar</button>
+</div>
+<div id="resultado"></div>
+
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <g id="setores" transform="rotate(9, 250, 250)"></g>
+  <g id="numeros"></g>
+</svg>
+
+<script>
+  const pontos = [20, 1, 18, 4, 13, 6, 10, 15, 2, 17,
+                  3, 19, 7, 16, 8, 11, 14, 9, 12, 5];
+
+  const grupoSetores = document.getElementById('setores');
+  const grupoNumeros = document.getElementById('numeros');
+  const btnCalcular = document.getElementById('btn-calcular');
+  const btnLimpar = document.getElementById('btn-limpar');
+  const resultadoDiv = document.getElementById('resultado');
+
+  const RAIO_BULL = 10;
+  const RAIO_OUTER_BULL = 25;
+  const RAIO_TRIPLO_INTERNO = 99;
+  const RAIO_TRIPLO_EXTERNO = 107;
+  const RAIO_DUPLO_INTERNO = 162;
+  const RAIO_DUPLO_EXTERNO = 170;
+
+  const cicloCores = ['#5BA8B2', '#EAD788', '#E77AB4', '#6542D0'];
+
+  for (let i = 0; i < 20; i++) {
+    const baseAngulo = -90 -18;
+    const angInicio = (baseAngulo + i * 18) * Math.PI / 180;
+    const angFim = (baseAngulo + (i + 1) * 18) * Math.PI / 180;
+
+    const cor1 = i % 2 === 0 ? "#333" : "#ccc"; // simples
+    const cor2 = i % 2 === 0 ? "#666" : "#aaa"; // triplo/duplo
+
+    criaSetor(0, RAIO_TRIPLO_INTERNO, angInicio, angFim, cor1, pontos[i]);
+    criaSetor(RAIO_TRIPLO_INTERNO, RAIO_TRIPLO_EXTERNO, angInicio, angFim, cor2, pontos[i]);
+    criaSetor(RAIO_TRIPLO_EXTERNO, RAIO_DUPLO_INTERNO, angInicio, angFim, cor1, pontos[i]);
+    criaSetor(RAIO_DUPLO_INTERNO, RAIO_DUPLO_EXTERNO, angInicio, angFim, cor2, pontos[i]);
+  }
+
+  // bull interno
+  const bull = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+  bull.setAttribute("cx", 250);
+  bull.setAttribute("cy", 250);
+  bull.setAttribute("r", RAIO_BULL);
+  bull.setAttribute("fill", "#888");
+  bull.setAttribute("class", "setor");
+  grupoSetores.appendChild(bull);
+
+  // bull externo
+  const outerBull = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+  outerBull.setAttribute("cx", 250);
+  outerBull.setAttribute("cy", 250);
+  outerBull.setAttribute("r", RAIO_OUTER_BULL);
+  outerBull.setAttribute("fill", "#bbb");
+  outerBull.setAttribute("class", "setor");
+  grupoSetores.appendChild(outerBull);
+
+  // números
+  for (let i = 0; i < 20; i++) {
+    const ang = ((i * 18 - 90)) * Math.PI / 180;
+    const raioTexto = 185;
+    const x = 250 + raioTexto * Math.cos(ang);
+    const y = 250 + raioTexto * Math.sin(ang) + 5;
+
+    const texto = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    texto.setAttribute("x", x);
+    texto.setAttribute("y", y);
+    texto.setAttribute("text-anchor", "middle");
+    texto.textContent = pontos[i];
+    grupoNumeros.appendChild(texto);
+  }
+
+  // lógica de clique
+  document.querySelectorAll('.setor').forEach(setor => {
+    setor.setAttribute('data-click', '0');
+    setor.setAttribute('data-original', setor.getAttribute('fill'));
+
+    setor.addEventListener('click', () => {
+      let clickCount = parseInt(setor.getAttribute('data-click'));
+      clickCount = (clickCount + 1) % 5;
+      setor.setAttribute('data-click', clickCount);
+
+      if (clickCount === 0) {
+        setor.setAttribute('fill', setor.getAttribute('data-original'));
+      } else {
+        setor.setAttribute('fill', cicloCores[clickCount - 1]);
+      }
+
+      resultadoDiv.textContent = ""; // limpa resultado após clique
+    });
+  });
+
+// Botão de limpar
+btnLimpar.addEventListener('click', () => {
+  document.querySelectorAll('.setor').forEach(setor => {
+    const original = setor.getAttribute('data-original');
+    if (original) {
+      setor.setAttribute('fill', original);
+    }
+    setor.setAttribute('data-click', '0');
+  });
+
+  resultadoDiv.textContent = '';
+});
+
+
+btnCalcular.addEventListener('click', () => {
+  let soma = 0;  // Para somar
+  let subtracao = 0;  // Para subtrair
+  let multiplicacao = 1;  // Para multiplicação
+  let divisao = 1;        // Para divisão
+  let expressao = [];     // Para armazenar a expressão final
+
+  // Para armazenar os valores por cor
+  let numerosAzuis = [];
+  let numerosAmarelos = [];
+  let numerosRosas = [];
+  let numerosRoxos = [];
+
+  // Primeiro, percorre todos os setores do tabuleiro e separa os valores por cor
+  document.querySelectorAll('.setor').forEach(setor => {
+    const cor = setor.getAttribute('fill');
+    const valor = parseFloat(setor.getAttribute('data-valor'));
+
+    if (isNaN(valor)) return;
+
+    switch (cor) {
+      case '#5BA8B2':  // Azul (soma)
+        soma += valor;
+        numerosAzuis.push(valor);
+        break;
+      case '#EAD788':  // Amarelo (subtração)
+        subtracao += valor;
+        numerosAmarelos.push(valor);
+        break;
+      case '#E77AB4':  // Rosa (multiplicação)
+        multiplicacao *= valor;
+        numerosRosas.push(valor);
+        break;
+      case '#6542D0':  // Roxo (divisão)
+        divisao *= valor;
+        numerosRoxos.push(valor);
+        break;
+    }
+  });
+
+
+
+  // Agora que temos os valores separados, realizamos as operações na ordem correta:
+  // 1. Soma de todos os azuis
+  let resultado = soma;
+
+  // 2. Subtração de todos os amarelos
+  resultado -= subtracao;
+
+  // 3. Multiplicação de todos os rosas
+  resultado *= multiplicacao;
+
+  // 4. Divisão de todos os roxos
+  resultado /= divisao;
+
+  // Exibe a expressão com a sequência correta de operações
+  let expressaoFinal = [];
+
+  // Adiciona a expressão de soma (se houver mais de um número azul)
+  if (numerosAzuis.length > 0) {
+    expressaoFinal.push(`(${numerosAzuis.join(' + ')})`);
+  }
+
+  // Adiciona a expressão de subtração (se houver mais de um número amarelo)
+  if (numerosAmarelos.length > 0) {
+    expressaoFinal.push(`- (${numerosAmarelos.join(' - ')})`);
+  }
+
+  // Adiciona a expressão de multiplicação (se houver mais de um número rosa)
+  if (numerosRosas.length > 0) {
+    expressaoFinal.push(`× (${numerosRosas.join(' × ')})`);
+  }
+
+  // Adiciona a expressão de divisão (se houver mais de um número roxo)
+  if (numerosRoxos.length > 0) {
+    expressaoFinal.push(`÷ (${numerosRoxos.join(' ÷ ')})`);
+  }
+
+  // Exibe a expressão com o resultado
+  resultadoDiv.innerHTML = `${expressaoFinal.join(' ')} = ${resultado}`;
+});
+
+
+
+  function criaSetor(r1, r2, ang1, ang2, cor, valor) {
+    const x1 = 250 + r1 * Math.cos(ang1);
+    const y1 = 250 + r1 * Math.sin(ang1);
+    const x2 = 250 + r2 * Math.cos(ang1);
+    const y2 = 250 + r2 * Math.sin(ang1);
+    const x3 = 250 + r2 * Math.cos(ang2);
+    const y3 = 250 + r2 * Math.sin(ang2);
+    const x4 = 250 + r1 * Math.cos(ang2);
+    const y4 = 250 + r1 * Math.sin(ang2);
+
+    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+    const d = `
+      M ${x1} ${y1}
+      L ${x2} ${y2}
+      A ${r2} ${r2} 0 0 1 ${x3} ${y3}
+      L ${x4} ${y4}
+      A ${r1} ${r1} 0 0 0 ${x1} ${y1}
+      Z
+    `;
+    path.setAttribute("d", d.trim());
+    path.setAttribute("fill", cor);
+    path.setAttribute("class", "setor");
+
+    if (valor) path.setAttribute("data-valor", valor);
+
+    grupoSetores.appendChild(path);
+  }
+</script>
+
+</body>
+</html>
