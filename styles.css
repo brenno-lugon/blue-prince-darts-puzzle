@@ -43,4 +43,8 @@ text {
   gap: 10px; /* espaço entre os botões */
   margin-top: 10px;
 }
-	
+
+.badge-primary {
+    color: #fff;
+    background-color: #0d6efd;
+}

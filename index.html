@@ -19,9 +19,6 @@
 	  <meta property="og:description" content="Solve the darts puzzle in the Blue Prince game with our interactive solver.">
 	  <meta property="og:url" content="https://github.com/brenno-lugon/blue-prince-darts-puzzle">
 
-	  <!-- Favicon -->
-	  <link rel="icon" href="favicon.ico">
-
 	  <!-- Link to external CSS for styling -->
 	  <link rel="stylesheet" href="styles.css">
 	  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
@@ -34,9 +31,9 @@
 	<body>
 		<h2 style="color:white">Darts Puzzle Solver - Blue Prince Game</h2>
 		<div>
-		  <button id="btn-howtouse" type="button" class="btn btn-light btn-sm">How to use?</button>
+		  <button id="btn-howtouse" type="button" onclick="howToUseModal()" class="btn btn-light btn-sm">How to use?</button>
 		  <button id="btn-calcular" type="button" class="btn btn-primary btn-sm">Solve</button>
-		  <button id="btn-step" type="button" class="btn btn-light btn-sm">Detailed solution</button>
+		  <button id="btn-detailed" type="button" onclick="detailedSolutionModal()" class="btn btn-light btn-sm">Detailed solution</button>
 		  <button id="btn-limpar" type="button" class="btn btn-light btn-sm">Clear</button>
 		</div>
 		<div id="resultado" style="color:white"></div>
@@ -45,6 +42,39 @@
 		  <g id="setores" transform="rotate(9, 250, 250)"></g>
 		  <g id="numeros"></g>
 		</svg>
+		
+		<!-- Vertically centered modal -->
+		<div class="modal fade" id="howtouseModal" tabindex="-1" aria-labelledby="howtouseLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title" id="howtouseLabel">How to use?</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+			  </div>
+			  <div class="modal-body">
+				<p>Click on the numbers and sectors of the dartboard that correspond to the design of your game. To alternate between colors of the sectors, simply click multiple times. Similarly, to change the symbol of the central bullseye, toggle the click on the innermost bullseye. The central bullseye can also change color; to do this, click outside the innermost bullseye.</p>				
+				<p>When your setup is complete, click the "Solve" button to display the result.</p>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		
+		<!-- Vertically centered modal -->
+		<div class="modal fade" id="detailedSolutionModal" tabindex="-1" aria-labelledby="detailedSolutionLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title" id="detailedSolutionLabel">Detailed Solution</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+			  </div>
+			  <div class="modal-body" id="detailedSolutionModalBody">
+			
+			  </div>
+			</div>
+		  </div>
+		</div>
+		
 		<script src="functions.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 	<body>
 </html>

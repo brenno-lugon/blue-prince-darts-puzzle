@@ -81,23 +81,117 @@ bullDiamond.setAttribute("opacity", "0");
 bullDiamond.setAttribute("pointer-events", "none");
 bullDiamond.setAttribute("class", "diamond");
 
-// Triângulo SVG (ponta pra cima)
-const bullTriangle = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
-bullTriangle.setAttribute("points", `
-  ${250},${250 - 12}
-  ${250 - 12},${250 + 12}
-  ${250 + 12},${250 + 12}
-`);
-bullTriangle.setAttribute("fill", "none");
-bullTriangle.setAttribute("stroke", "black");
-bullTriangle.setAttribute("stroke-width", "2");
-bullTriangle.setAttribute("opacity", "0");
-bullTriangle.setAttribute("transform", `rotate(-9 250 250)`);
-bullTriangle.setAttribute("pointer-events", "none");
+const bullWave1 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+bullWave1.setAttribute("fill", "none");
+bullWave1.setAttribute("stroke", "black");
+bullWave1.setAttribute("stroke-width", "2");
+bullWave1.setAttribute("opacity", "0");
+bullWave1.setAttribute("transform", `rotate(-9 250 250)`);
+bullWave1.setAttribute("pointer-events", "none");
+
+const startX = 231;
+const startY = 234;
+const width = 37;
+const height = 10;
+const spacing = 33;
+
+// começa em (235,250), termina em (265,250), curvando pra cima e pra baixo
+const d1 = `
+  M ${startX} ${startY}
+  C ${startX + width * 0.25} ${startY + height},
+    ${startX + width * 0.75} ${startY - height},
+    ${startX + width} ${startY}
+  M ${startX + 2} ${startY + spacing}
+  C ${startX + width * 0.25} ${startY + spacing + height},
+    ${startX + width * 0.75} ${startY + spacing - height},
+    ${startX + width} ${startY + spacing}	
+`;
+bullWave1.setAttribute("d", d1);
+
+const bullWave2 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+bullWave2.setAttribute("fill", "none");
+bullWave2.setAttribute("stroke", "black");
+bullWave2.setAttribute("stroke-width", "2");
+bullWave2.setAttribute("opacity", "0");
+bullWave2.setAttribute("transform", `rotate(-9 250 250)`);
+bullWave2.setAttribute("pointer-events", "none");
+
+const startX2 = 228;
+const startY2 = 234;
+const width2 = 44;
+const spacing2 = 5;
+
+// começa em (235,250), termina em (265,250), curvando pra cima e pra baixo
+const d2 = `
+  M ${startX} ${startY}
+  C ${startX + width * 0.25} ${startY + height},
+    ${startX + width * 0.75} ${startY - height},
+    ${startX + width} ${startY}
+  M ${startX2} ${startY2 + spacing2}
+  C ${startX2 + width2 * 0.25} ${startY2 + spacing2 + height},
+    ${startX2 + width2 * 0.75} ${startY2 + spacing2 - height},
+    ${startX2 + width2} ${startY2 + spacing2}
+	
+	
+  M ${startX + 2} ${startY + spacing}
+  C ${startX + width * 0.25} ${startY + spacing + height},
+    ${startX + width * 0.75} ${startY + spacing - height},
+    ${startX + width} ${startY + spacing}	
+  M ${startX2 + 1} ${startY2 + spacing - spacing2}
+  C ${startX2 + width2 * 0.25} ${startY2 + spacing - spacing2 + height},
+    ${startX2 + width2 * 0.75} ${startY2 + spacing - spacing2 - height},
+    ${startX2 + width2} ${startY2 + spacing - spacing2}		
+`;
+bullWave2.setAttribute("d", d2);
+
+const bullWave3 = document.createElementNS("http://www.w3.org/2000/svg", "path");
+bullWave3.setAttribute("fill", "none");
+bullWave3.setAttribute("stroke", "black");
+bullWave3.setAttribute("stroke-width", "2");
+bullWave3.setAttribute("opacity", "0");
+bullWave3.setAttribute("transform", `rotate(-9 250 250)`);
+bullWave3.setAttribute("pointer-events", "none");
+
+const startX3 = 226;
+const startY3 = 234;
+const width3 = 48;
+const spacing3 = 10;
+
+// começa em (235,250), termina em (265,250), curvando pra cima e pra baixo
+const d3 = `
+  M ${startX} ${startY}
+  C ${startX + width * 0.25} ${startY + height},
+    ${startX + width * 0.75} ${startY - height},
+    ${startX + width} ${startY}
+  M ${startX2} ${startY2 + spacing2}
+  C ${startX2 + width2 * 0.25} ${startY2 + spacing2 + height},
+    ${startX2 + width2 * 0.75} ${startY2 + spacing2 - height},
+    ${startX2 + width2} ${startY2 + spacing2}
+  M ${startX3} ${startY3 + spacing3}
+  C ${startX3 + width3 * 0.25} ${startY3 + spacing3 + height},
+    ${startX3 + width3 * 0.75} ${startY3 + spacing3 - height},
+    ${startX3 + width3} ${startY3 + spacing3}	
+	
+  M ${startX + 2} ${startY + spacing}
+  C ${startX + width * 0.25} ${startY + spacing + height},
+    ${startX + width * 0.75} ${startY + spacing - height},
+    ${startX + width} ${startY + spacing}	
+  M ${startX2 + 1} ${startY2 + spacing - spacing2}
+  C ${startX2 + width2 * 0.25} ${startY2 + spacing - spacing2 + height},
+    ${startX2 + width2 * 0.75} ${startY2 + spacing - spacing2 - height},
+    ${startX2 + width2} ${startY2 + spacing - spacing2}
+  M ${startX3 + 1} ${startY3 + spacing - spacing3}	
+  C ${startX3 + width3 * 0.25} ${startY3 + spacing - spacing3 + height},
+    ${startX3 + width3 * 0.75} ${startY3 + spacing - spacing3 - height},
+    ${startX3 + width3} ${startY3 + spacing - spacing3}	
+`;
+bullWave3.setAttribute("d", d3);
 
 grupoSetores.appendChild(bullSquare);
 grupoSetores.appendChild(bullDiamond);
-grupoSetores.appendChild(bullTriangle);
+grupoSetores.appendChild(bullWave1);
+grupoSetores.appendChild(bullWave2);
+grupoSetores.appendChild(bullWave3);
 
 let formaIndex = 0; // 0 = nada, 1 = quadrado, 2 = diamante, 3 = triângulo
 
@@ -113,19 +207,25 @@ innerBull.addEventListener('click', (event) => {
     const distancia = Math.sqrt(dx * dx + dy * dy);
 
     if (distancia <= RAIO_BULL) {
-        formaIndex = (formaIndex + 1) % 4;
+        formaIndex = (formaIndex + 1) % 6;
 
         // Zera tudo primeiro
         bullSquare.setAttribute("opacity", "0");
         bullDiamond.setAttribute("opacity", "0");
-        bullTriangle.setAttribute("opacity", "0");
+        bullWave1.setAttribute("opacity", "0");
+        bullWave2.setAttribute("opacity", "0");
+        bullWave3.setAttribute("opacity", "0");
 
         if (formaIndex === 1) {
             bullSquare.setAttribute("opacity", "1");
         } else if (formaIndex === 2) {
             bullDiamond.setAttribute("opacity", "1");
         } else if (formaIndex === 3) {
-            bullTriangle.setAttribute("opacity", "1");
+            bullWave1.setAttribute("opacity", "1");
+        } else if (formaIndex === 4) {
+            bullWave2.setAttribute("opacity", "1");
+        } else if (formaIndex === 5) {
+            bullWave3.setAttribute("opacity", "1");
         }
     } else {
         processaCliqueSetor(innerBull);
@@ -181,27 +281,90 @@ btnLimpar.addEventListener('click', () => {
         }
         setor.setAttribute('data-click', '0');
     });
-    // Zera bull
+
+    // Zera tudo primeiro
     bullSquare.setAttribute("opacity", "0");
     bullDiamond.setAttribute("opacity", "0");
-    bullTriangle.setAttribute("opacity", "0");
+    bullWave1.setAttribute("opacity", "0");
+    bullWave2.setAttribute("opacity", "0");
+    bullWave3.setAttribute("opacity", "0");
 
     resultadoDiv.textContent = '';
 });
 
-function aplicaBull(resultado, corDoSetor) {
+function arredondarParaUnidadeMaisProxima(valor) {
+    const arredondado = Math.round(valor);
+    return Math.min(arredondado, 9);
+}
+
+function arredondarParaDezenaMaisProxima(valor) {
+    const arredondado = Math.round(valor / 10) * 10;
+    return Math.min(arredondado, 99);
+}
+
+function arredondarParaCentenaMaisProxima(valor) {
+    const arredondado = Math.round(valor / 100) * 100;
+    return Math.min(arredondado, 999);
+}
+
+function aplicaBull(resultado, corDoSetor, setorNumero, etapas) {
     const bull = document.getElementById('bull');
     const corDoBull = bull.getAttribute('fill');
 
     if (corDoBull === corDoSetor) {
         if (bullSquare && bullSquare.getAttribute('opacity') === '1') {
+            etapas[setorNumero].push(` -> ${resultado}²`);
             resultado = resultado ** 2;
         } else if (bullDiamond && bullDiamond.getAttribute('opacity') === '1') {
             const invertido = parseFloat(resultado.toString().split('').reverse().join(''));
+            etapas[setorNumero].push(` -> ${resultado} (reversed)`);
             resultado = invertido;
+        } else if (bullWave1 && bullWave1.getAttribute('opacity') === '1') {
+            etapas[setorNumero].push(` -> ${resultado} (round to the nearest 1)`);
+            resultado = arredondarParaUnidadeMaisProxima(resultado);
+        } else if (bullWave2 && bullWave2.getAttribute('opacity') === '1') {
+            etapas[setorNumero].push(` -> ${resultado} (round to the nearest 10)`);
+            resultado = arredondarParaDezenaMaisProxima(resultado);
+        } else if (bullWave3 && bullWave3.getAttribute('opacity') === '1') {
+            etapas[setorNumero].push(` -> ${resultado} (round to the nearest 100)`);
+            resultado = arredondarParaCentenaMaisProxima(resultado);
         }
+        etapas[setorNumero].push(` = ${resultado}`);
     }
     return resultado;
+}
+
+function writeDetailModal(setorNumero, etapas, modalBodyContent, lastNonEmptySetor) {
+
+    const sectorLabels = ['1st', '2nd', '3rd', '4th'];
+
+    sectorLabels.forEach((label, index) => {
+        const sectorIndex = index + 1;
+        if (etapas[sectorIndex]) {
+            modalBodyContent.innerHTML += `<strong>${label} sector:</strong> `;
+
+            if (sectorIndex !== 1) {
+                modalBodyContent.innerHTML += `${lastValue}`;
+            }
+
+            etapas[sectorIndex].forEach((etapa, i) => {
+                if (i === 0 && sectorIndex === 1) {
+                    modalBodyContent.innerHTML += `${etapa.substring(3)}`; // corta os 3 primeiros caracteres
+                } else {
+                    modalBodyContent.innerHTML += `${etapa}`;
+                }
+            });
+
+            modalBodyContent.innerHTML += `<br>`;
+
+            // Atualiza o lastValue com o último item da etapa atual (o resultado)
+            lastValue = (etapas[sectorIndex][etapas[sectorIndex].length - 1]).substring(3);
+        }
+    });
+
+    if (setorNumero === lastNonEmptySetor) {
+        modalBodyContent.innerHTML += `<br><div class="h3"><span class="badge badge-primary">Result: ${lastValue}</span></div>`;
+    }
 }
 
 function calcularSetorPorNumero(setorNumero) {
@@ -210,10 +373,8 @@ function calcularSetorPorNumero(setorNumero) {
     let multiplicacao = 1;
     let divisao = 1;
     let resultado = 0;
-    let numerosAzuis = [];
-    let numerosAmarelos = [];
-    let numerosRosas = [];
-    let numerosRoxos = [];
+    let etapas = [];
+    etapas[setorNumero] = [];
 
     const setores = Array.from(document.querySelectorAll(`.setor[data-setor="${setorNumero}"]`));
     let corDoSetor = null;
@@ -227,22 +388,22 @@ function calcularSetorPorNumero(setorNumero) {
         switch (cor) {
         case '#5BA8B2': // Azul (soma)
             soma += valor;
-            numerosAzuis.push(valor);
+            etapas[setorNumero].push(` + ${valor}`);
             corDoSetor = cor;
             break;
         case '#EAD788': // Amarelo (subtração)
             subtracao += valor;
-            numerosAmarelos.push(valor);
+            etapas[setorNumero].push(` - ${valor}`);
             corDoSetor = cor;
             break;
         case '#E77AB4': // Rosa (multiplicação)
             multiplicacao *= valor;
-            numerosRosas.push(valor);
+            etapas[setorNumero].push(` x ${valor}`);
             corDoSetor = cor;
             break;
         case '#6542D0': // Roxo (divisão)
             divisao *= valor;
-            numerosRoxos.push(valor);
+            etapas[setorNumero].push(` ÷ ${valor}`);
             corDoSetor = cor;
             break;
         }
@@ -263,13 +424,11 @@ function calcularSetorPorNumero(setorNumero) {
         break;
     }
 
-    // Exibição por setor
-    // const divResultado = document.getElementById('resultado' + setorNumero);
-    // divResultado.innerHTML = `Setor ${setorNumero}: ${resultado}`;
-
     return {
         resultado,
-        cor: corDoSetor
+        cor: corDoSetor,
+        setorNumero,
+        etapas
     };
 }
 
@@ -285,10 +444,25 @@ btnCalcular.addEventListener('click', () => {
     let final = 0;
     let multiplicador = 1;
     let divisor = 1;
+    let lastSector = false;
+
+    const modalBodyContent = document.getElementById('detailedSolutionModalBody');
+    modalBodyContent.innerHTML = '';
+
+    let lastNonEmptySetor = -1;
+
+    for (let i = setores.length - 1; i >= 0; i--) {
+        if (setores[i].cor != null) {
+            lastNonEmptySetor = i + 1;
+            break;
+        }
+    }
 
     setores.forEach(({
             resultado,
-            cor
+            cor,
+            setorNumero,
+            etapas
         }) => {
         if (!resultado || !cor)
             return;
@@ -296,20 +470,29 @@ btnCalcular.addEventListener('click', () => {
         switch (cor) {
         case '#5BA8B2': // Azul
             final += resultado;
+            etapas[setorNumero].push(` = ${final}`);
             break;
         case '#EAD788': // Amarelo
             final -= resultado;
+            etapas[setorNumero].push(` = ${final}`);
             break;
         case '#E77AB4': // Rosa
             final *= resultado;
+            etapas[setorNumero].push(` = ${final}`);
             break;
         case '#6542D0': // Roxo
             final /= resultado;
+            etapas[setorNumero].push(` = ${final}`);
             break;
         }
 
-        final = aplicaBull(final, cor);
+        final = aplicaBull(final, cor, setorNumero, etapas);
+        writeDetailModal(setorNumero, etapas, modalBodyContent, lastNonEmptySetor);
 
+        //console.log(`Cálculo do Setor ${setorNumero}:`);
+        //etapas[setorNumero].forEach(etapa => {
+        //	console.log(etapa);
+        //});
     });
 
     document.getElementById('resultado').innerHTML = `Result: ${final}`;
@@ -340,4 +523,16 @@ function criaSetor(r1, r2, ang1, ang2, cor, valor, setorNumero) {
     path.setAttribute("data-setor", setorNumero);
     path.setAttribute("data-valor", valor);
     grupoSetores.appendChild(path);
+}
+
+function howToUseModal() {
+    const myModalEl = document.getElementById('howtouseModal');
+    const modal = new bootstrap.Modal(myModalEl);
+    modal.show();
+}
+
+function detailedSolutionModal() {
+    const myModalEl = document.getElementById('detailedSolutionModal');
+    const modal = new bootstrap.Modal(myModalEl);
+    modal.show();
 }
