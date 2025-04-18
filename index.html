@@ -31,10 +31,11 @@
 	<body>
 		<h2 style="color:white">Darts Puzzle Solver - Blue Prince Game</h2>
 		<div>
-		  <button id="btn-howtouse" type="button" onclick="howToUseModal()" class="btn btn-light btn-sm">How to use?</button>
-		  <button id="btn-calcular" type="button" class="btn btn-primary btn-sm">Solve</button>
-		  <button id="btn-detailed" type="button" onclick="detailedSolutionModal()" class="btn btn-light btn-sm">Detailed solution</button>
-		  <button id="btn-limpar" type="button" class="btn btn-light btn-sm">Clear</button>
+		  <button id="btn-howtouse" type="button" onclick="howToUseModal()" class="btn btn-light btn-sm btn-small" style="margin-right:0px">How to use?</button>
+		  <button id="btn-calcular" type="button"onclick="solvePuzzle()" class="btn btn-primary btn-sm">Solve</button>
+		  <button id="btn-limpar" type="button" onclick="clearPuzzle()" class="btn btn-primary btn-sm" style="margin-right:0px">Clear</button>  
+		  <button id="btn-detailed" type="button" onclick="detailedSolutionModal()" class="btn btn-light btn-sm btn-small">Detailed solution</button>
+		  <button id="btn-example" type="button" onclick="randomExample()" class="btn btn-light btn-sm btn-small">Random example</button>
 		</div>
 		<div id="resultado" style="color:white"></div>
 
