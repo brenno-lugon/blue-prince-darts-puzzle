@@ -22,8 +22,8 @@ for (let i = 0; i < 20; i++) {
     const angInicio = (baseAngulo + i * 18) * Math.PI / 180;
     const angFim = (baseAngulo + (i + 1) * 18) * Math.PI / 180;
 
-    const cor1 = i % 2 === 0 ? "#333" : "#ccc"; // simples
-    const cor2 = i % 2 === 0 ? "#666" : "#aaa"; // triplo/duplo
+    const cor1 = i % 2 === 0 ? "#292b2e" : "#d6e1e4"; // simples
+    const cor2 = i % 2 === 0 ? "#818684" : "#393e3d"; // triplo/duplo
 
     criaSetor(0, RAIO_TRIPLO_INTERNO, angInicio, angFim, cor1, pontos[i], 1); // setor 1
     criaSetor(RAIO_TRIPLO_INTERNO, RAIO_TRIPLO_EXTERNO, angInicio, angFim, cor2, pontos[i], 2); // setor 2
@@ -36,9 +36,11 @@ const bull = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 bull.setAttribute("cx", 250);
 bull.setAttribute("cy", 250);
 bull.setAttribute("r", RAIO_OUTER_BULL);
-bull.setAttribute("fill", "#bbb");
+bull.setAttribute("fill", "#292b2e");
 bull.setAttribute("id", "bull"); // Dê um ID exclusivo
 bull.setAttribute("data-click", "0");
+bull.setAttribute("stroke", "black");
+bull.setAttribute("stroke-width", "1");
 bull.setAttribute("data-original", "#bbb");
 bull.setAttribute("class", "setor");
 
@@ -48,6 +50,7 @@ innerBull.setAttribute("cx", 250);
 innerBull.setAttribute("cy", 250);
 innerBull.setAttribute("r", RAIO_BULL);
 innerBull.setAttribute("fill", "#666");
+
 innerBull.setAttribute("id", "innerBull"); // Dê um ID exclusivo
 innerBull.setAttribute("data-click", "0");
 innerBull.setAttribute("data-original", "#bbb");
@@ -583,6 +586,8 @@ function criaSetor(r1, r2, ang1, ang2, cor, valor, setorNumero) {
     path.setAttribute("d", d.trim());
     path.setAttribute("fill", cor);
     path.setAttribute("class", "setor");
+	path.setAttribute("stroke", "black");
+    path.setAttribute("stroke-width", "1");
     path.setAttribute("data-setor", setorNumero);
     path.setAttribute("data-valor", valor);
     grupoSetores.appendChild(path);
