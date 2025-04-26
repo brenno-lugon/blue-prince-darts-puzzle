@@ -6,24 +6,34 @@ body {
   justify-content: start;
   padding-top: 30px;
   color: white;
-  font-family: sans-serif;
+  font-family: "F25_BlackletterTypewriter", sans-serif;
 }
 
-.svg-wrapper {
-  width: 500px;
-  height: 400px; /* 500 - 50 = visible height */
-  overflow: hidden;
-  position: relative;
-  margin-top:20px;
+.svg-scroll {
+  width: 100%;
+  overflow-x: auto;
+  padding-top: 20px;
+  box-sizing: border-box;
 }
 
-.svg-wrapper svg {
+.svg-center {
+  min-width: 500px; /* mesma largura do SVG */
+  display: flex;
+  justify-content: center;
+}
+
+.svg-center svg {
   width: 500px;
   height: 500px;
-  transform: translateY(-50px); /* moves it up */
+  flex-shrink: 0;
+  display: block;
 }
 
 .setor {
+  cursor: pointer;      
+}
+
+.setorExterno {
   cursor: pointer;      
 }
 
@@ -48,7 +58,7 @@ svg, .setor, text {
 
 .btn-small {
   padding: 2px 10px 2px 10px !important;
-  margin-top: 5px;
+  margin-top: 8px;
 }
 
 #resultado {
@@ -85,4 +95,9 @@ svg, .setor, text {
   background-color: transparent;
   color: transparent;
   border: none;
+}
+
+@font-face {
+    font-family: 'F25_BlackletterTypewriter';
+    src: url('F25_BlackletterTypewriter.ttf') format('truetype');
 }

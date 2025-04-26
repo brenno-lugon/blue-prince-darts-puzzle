@@ -38,20 +38,24 @@
 	  gtag('config', 'G-PSLWGYZGKE');
 	</script>
 	<body>
-		<h2 style="color:white">Darts Puzzle Solver - Blue Prince Game</h2>
-		<div>
-		  <button id="btn-howtouse" type="button" onclick="howToUseModal()" class="btn btn-light btn-sm btn-small" style="margin-right:0px">How to use?</button>
-		  <button id="btn-calcular" type="button"onclick="solvePuzzle()" class="btn btn-primary btn-sm">Solve</button>
-		  <button id="btn-limpar" type="button" onclick="clearPuzzle()" class="btn btn-primary btn-sm" style="margin-right:0px">Clear</button>  
-		  <button id="btn-detailed" type="button" onclick="detailedSolutionModal()" class="btn btn-light btn-sm btn-small">Detailed solution</button>
-		  <button id="btn-example" type="button" onclick="randomExample()" class="btn btn-light btn-sm btn-small">Random example</button>
+		<h2 class="d-flex justify-content-center align-items-center flex-wrap gap-1 text-center" style="color:white; font-family: 'F25_BlackletterTypewriter'; font-size:40px; letter-spacing:-3px">
+  Dart Puzzle Solver - Blue Prince Game
+</h2>
+		<div class="d-flex justify-content-center flex-wrap gap-1">
+		  <div><button id="btn-howtouse" type="button" onclick="howToUseModal()" class="btn btn-light btn-sm btn-small" style="margin-right:0px">How to use?</button></div>
+		  <div><button id="btn-calcular" type="button"onclick="solvePuzzle()" class="btn btn-primary btn-sm">Solve</button></div>
+		  <div><button id="btn-limpar" type="button" onclick="clearPuzzle()" class="btn btn-primary btn-sm" style="margin-right:0px">Clear</button></div>  
+		  <div><button id="btn-detailed" type="button" onclick="detailedSolutionModal()" class="btn btn-light btn-sm btn-small">Detailed solution</button></div>
+		  <div><button id="btn-example" type="button" onclick="randomExample()" class="btn btn-light btn-sm btn-small">Random example</button></div>
 		</div>
 		<span class="badge-yellow" id="resultado"></span>
-		<div class="svg-wrapper">
-		<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-		  <g id="setores" transform="rotate(9, 250, 250)"></g>
-		  <g id="numeros"></g>
-		</svg>
+		<div class="svg-scroll">
+			<div class="svg-center">
+				<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+				  <g id="setores" transform="rotate(9, 250, 250)"></g>
+				  <g id="numeros"></g>
+				</svg>
+			</div>
 		</div>
 		
 		<!-- Vertically centered modal -->
