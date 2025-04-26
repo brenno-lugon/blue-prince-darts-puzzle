@@ -552,17 +552,17 @@ function clearPuzzle() {
 
 function arredondarParaUnidadeMaisProxima(valor) {
     const arredondado = Math.round(valor);
-    return Math.min(arredondado, 9);
+    return arredondado;
 }
 
 function arredondarParaDezenaMaisProxima(valor) {
     const arredondado = Math.round(valor / 10) * 10;
-    return Math.min(arredondado, 99);
+    return arredondado;
 }
 
 function arredondarParaCentenaMaisProxima(valor) {
     const arredondado = Math.round(valor / 100) * 100;
-    return Math.min(arredondado, 999);
+    return arredondado;
 }
 
 function aplicaBull(resultado, corDoSetor, setorNumero, etapas) {
