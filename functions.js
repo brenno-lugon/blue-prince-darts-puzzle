@@ -647,21 +647,24 @@ function calcularSetorPorNumero(setorNumero) {
 		
         if (isNaN(valor))
             return;
-
+				
+		const temOnethird = document.querySelector(`.onethird[data-valor="${valor}"][data-setor="${setorNumero}"]`) !== null;		
+		const valorOriginal = temOnethird ? parseFloat(setor.getAttribute('data-valor-original')) : parseFloat(setor.getAttribute('data-valor'));
+			
 		// operacao de exclusao (x)
-        const x = Array.from(document.querySelectorAll(`.x[data-valor="${valor}"][data-setor="6"]`))
+        const x = Array.from(document.querySelectorAll(`.x[data-valor="${valorOriginal}"][data-setor="6"]`))
             .some(e1 => e1.getAttribute("opacity") === "1");
         if (x) 
             return; // Pula só esse número
 		
 		// operacao de exclusao (divisao por 2 - bar)
-        const oo = Array.from(document.querySelectorAll(`.oo[data-valor="${valor}"][data-setor="6"]`))
+        const oo = Array.from(document.querySelectorAll(`.oo[data-valor="${valorOriginal}"][data-setor="6"]`))
             .some(e1 => e1.getAttribute("opacity") === "1");
         if (oo) 
             valor = 2*valor; // Multiplica por 2
 		
 		// operacao de exclusao (divisao por 2 - bar)
-        const bar = Array.from(document.querySelectorAll(`.bar[data-valor="${valor}"][data-setor="6"]`))
+        const bar = Array.from(document.querySelectorAll(`.bar[data-valor="${valorOriginal}"][data-setor="6"]`))
             .some(e1 => e1.getAttribute("opacity") === "1");
         if (bar) 
             valor = valor/2; // Divide por 2
@@ -754,22 +757,18 @@ function solvePuzzle() {
         switch (cor) {
         case '#5BA8B2': // Azul
             final += resultado;
-			//if (oo) final += resultado;
             etapas[setorNumero].push(` = ${formataValorDecimal(final)}`);
             break;
         case '#EAD788': // Amarelo
             final -= resultado;
-			//if (oo) final += resultado;
             etapas[setorNumero].push(` = ${formataValorDecimal(final)}`);
             break;
         case '#E77AB4': // Rosa
             final *= resultado;
-			//if (oo) final += resultado;
             etapas[setorNumero].push(` = ${formataValorDecimal(final)}`);
             break;
         case '#6542D0': // Roxo
             final /= resultado;
-			//if (oo) final += resultado;
             etapas[setorNumero].push(` = ${formataValorDecimal(final)}`);
             break;
         }
